@@ -1,7 +1,7 @@
 # Личный проект «Readme»
 
 * Студент: [Максим Пиванов](https://up.htmlacademy.ru/nodejs-2/2/user/2021469).
-* Наставник: `Неизвестно`.
+* Наставник: [Юлия Корецкая](https://htmlacademy.ru/profile/id11886).
 
 ---
 
