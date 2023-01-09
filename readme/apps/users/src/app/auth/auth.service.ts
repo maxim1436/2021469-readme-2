@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { User } from '@readme/shared-types';
 import * as dayjs from 'dayjs';
-import { BlogUserMemoryRepository } from '../blog-user/blog-user-memory.repository';
 import { BlogUserEntity } from '../blog-user/blog-user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
+import { BlogUserRepository } from '../blog-user/blog-user.repository';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly blogUserRepository: BlogUserMemoryRepository
-  ) {}
+    private readonly blogUserRepository: BlogUserRepository,
+  ){}
 
   async register(dto: CreateUserDto) {
     const {email, firstname, lastname, password, avatar, registerDate} = dto;
