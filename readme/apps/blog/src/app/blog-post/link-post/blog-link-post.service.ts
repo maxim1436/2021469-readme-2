@@ -12,7 +12,7 @@ export class BlogLinkPostService {
   ) {}
 
   async createLinkPost(dto: CreateLinkPostDto): Promise<LinkPost> {
-    const linkPostEntity = new BlogLinkPostEntity({ ...dto});
+    const linkPostEntity = new BlogLinkPostEntity({ ...dto, comments:[]});
     return this.blogLinkPostRepository.create(linkPostEntity);
   }
 

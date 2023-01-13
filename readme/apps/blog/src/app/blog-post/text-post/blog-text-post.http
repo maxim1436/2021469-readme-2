@@ -7,18 +7,19 @@ Content-Type: application/json
   "announceText": "Текст анонса",
   "text": "Расширенный текст публикации",
   "userId": "113",
-  "tags": "Журналы"
+  "tags": "Журналы",
+  "status": "Опубликована"
 }
 
 ###
 
 # Delete the post by id
-DELETE http://localhost:3333/api/text-posts/3 HTTP/1.1
+DELETE http://localhost:3333/api/text-posts/1 HTTP/1.1
 
 ###
 
 # Get post by id
-GET http://localhost:3333/api/text-posts/5 HTTP/1.1
+GET http://localhost:3333/api/text-posts/1 HTTP/1.1
 
 ###
 

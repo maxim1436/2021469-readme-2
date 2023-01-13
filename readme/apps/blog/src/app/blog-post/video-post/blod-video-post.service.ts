@@ -12,7 +12,7 @@ export class BlogVideoPostService {
   ) {}
 
   async createVideoPost(dto: CreateVideoPostDto): Promise<VideoPost> {
-    const VideoPostEntity = new BlogVideoPostEntity({ ...dto});
+    const VideoPostEntity = new BlogVideoPostEntity({ ...dto, comments: []});
     return this.blogVideoPostRepository.create(VideoPostEntity);
   }
 

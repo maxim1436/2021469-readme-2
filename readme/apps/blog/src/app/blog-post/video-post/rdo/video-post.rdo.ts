@@ -14,6 +14,9 @@ export class VideoPostRdo {
   public tags: string;
 
   @Expose()
+  public status: string;
+
+  @Expose()
   public publishAt: string;
 
   @Expose()

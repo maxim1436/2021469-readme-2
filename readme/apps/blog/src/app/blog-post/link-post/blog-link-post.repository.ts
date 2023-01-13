@@ -13,7 +13,13 @@ export class BlogLinkPostRepository implements CRUDRepository<BlogLinkPostEntity
     return this.prisma.link_Post.create({
       data: {
         ...entityData,
+        comments: {
+          connect: []
+        }
       },
+      include: {
+        comments: true,
+      }
     });
   }
 
@@ -30,11 +36,18 @@ export class BlogLinkPostRepository implements CRUDRepository<BlogLinkPostEntity
       where: {
         id
       },
+      include: {
+        comments: true,
+      }
     });
   }
 
   public find(): Promise<LinkPost[]> {
-    return this.prisma.link_Post.findMany({});
+    return this.prisma.link_Post.findMany({
+      include: {
+        comments: true,
+      }
+    });
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

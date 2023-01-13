@@ -13,7 +13,13 @@ export class BlogPhotoPostRepository implements CRUDRepository<BlogPhotoPostEnti
     return this.prisma.photo_Post.create({
       data: {
         ...entityData,
+        comments: {
+          connect: []
+        }
       },
+      include: {
+        comments: true,
+      }
     });
   }
 
@@ -30,11 +36,18 @@ export class BlogPhotoPostRepository implements CRUDRepository<BlogPhotoPostEnti
       where: {
         id
       },
+      include: {
+        comments: true,
+      }
     });
   }
 
   public find(): Promise<PhotoPost[]> {
-    return this.prisma.photo_Post.findMany({});
+    return this.prisma.photo_Post.findMany({
+      include: {
+        comments: true,
+      }
+    });
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

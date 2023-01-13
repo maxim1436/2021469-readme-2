@@ -3,4 +3,5 @@ export class CreateLinkPostDto {
   public description: string;
   public tags: string;
   public userId: string;
+  public status: string;
 }

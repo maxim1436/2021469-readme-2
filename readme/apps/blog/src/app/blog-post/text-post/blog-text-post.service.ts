@@ -12,7 +12,7 @@ export class BlogTextPostService {
   ) {}
 
   async createTextPost(dto: CreateTextPostDto): Promise<TextPost> {
-    const textPostEntity = new BlogTextPostEntity({ ...dto});
+    const textPostEntity = new BlogTextPostEntity({ ...dto, comments: []});
     return this.blogTextPostRepository.create(textPostEntity);
   }
 

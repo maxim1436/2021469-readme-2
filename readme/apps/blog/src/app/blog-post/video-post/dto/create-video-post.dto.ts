@@ -3,4 +3,5 @@ export class CreateVideoPostDto {
   public link: string;
   public tags: string;
   public userId: string;
+  public status: string;
 }

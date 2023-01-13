@@ -11,31 +11,29 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id             Int @id @default(autoincrement())
-  status         Status[]
-  comments       Comment[]
-  videoPosts     Video_Post[]
-  textPosts      Text_Post[]
-  photoPosts     Photo_Post[]
-  linkPosts      Link_Post[]
-}
-
 model Video_Post {
  id             Int @id @default(autoincrement())
- post           Post @relation(fields: [postId], references: [id])
  title          String
  link           String
  tags           String
  createdAt      DateTime @default(now())
  publishAt      DateTime @default(now())
  userId         String
- postId         Int
+ status         String
+ comments       CommentsVideoPost[]
+}
+
+model CommentsVideoPost {
+  id          Int @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  text        String
+  userId      String
+  postId      Int
+  post        Video_Post @relation(fields: [postId], references: [id])
 }
 
 model Text_Post {
  id             Int @id @default(autoincrement())
- post           Post @relation(fields: [postId], references: [id])
  title          String
  announceText   String
  text           String
@@ -43,44 +41,59 @@ model Text_Post {
  createdAt      DateTime @default(now())
  publishAt      DateTime @default(now())
  userId         String
- postId         Int
+ status         String
+ comments       CommentsTextPost[]
+}
+
+model CommentsTextPost {
+  id          Int @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  text        String
+  userId      String
+  postId      Int
+  post        Text_Post @relation(fields: [postId], references: [id])
 }
 
 model Photo_Post {
  id             Int @id @default(autoincrement())
- post           Post @relation(fields: [postId], references: [id])
  photo          String
  tags           String
  createdAt      DateTime @default(now())
  publishAt      DateTime @default(now())
  userId         String
- postId         Int
+ status         String
+ comments       CommentsPhotoPost[]
+}
+
+model CommentsPhotoPost {
+  id          Int @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  text        String
+  userId      String
+  postId      Int
+  post        Photo_Post @relation(fields: [postId], references: [id])
 }
 
 model Link_Post {
  id             Int @id @default(autoincrement())
- post           Post @relation(fields: [postId], references: [id])
  link           String
  description    String
  tags           String
  createdAt      DateTime @default(now())
  publishAt      DateTime @default(now())
  userId         String
- postId         Int
+ status         String
+ comments       CommentsLinkPost[]
 }
 
-model Status {
-  id           Int @id @default(autoincrement())
-  title        String
-  posts        Post[]
-}
-
-model Comment {
+model CommentsLinkPost {
   id          Int @id @default(autoincrement())
   createdAt   DateTime @default(now())
   text        String
   userId      String
   postId      Int
-  post        Post @relation(fields: [postId], references: [id])
+  post        Link_Post @relation(fields: [postId], references: [id])
 }
+
+
 

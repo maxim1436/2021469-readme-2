@@ -14,7 +14,13 @@ export class BlogVideoPostRepository implements CRUDRepository<BlogVideoPostEnti
     return this.prisma.video_Post.create({
       data: {
         ...entityData,
+        comments: {
+          connect: []
+        }
       },
+      include: {
+        comments: true,
+      }
     });
   }
 
@@ -31,11 +37,18 @@ export class BlogVideoPostRepository implements CRUDRepository<BlogVideoPostEnti
       where: {
         id
       },
+      include: {
+        comments: true,
+      }
     });
   }
 
   public find(): Promise<VideoPost[]> {
-    return this.prisma.video_Post.findMany({});
+    return this.prisma.video_Post.findMany({
+      include: {
+        comments: true,
+      }
+    });
   }
 
   public update(id: number, item: BlogVideoPostEntity): Promise<VideoPost> {

@@ -13,10 +13,15 @@ export class BlogTextPostRepository implements CRUDRepository<BlogTextPostEntity
     return this.prisma.text_Post.create({
       data: {
         ...entityData,
+        comments: {
+          connect: []
+        }
       },
+      include: {
+        comments: true,
+      }
     });
   }
-
   public async destroy(id: number): Promise<void> {
     await this.prisma.text_Post.delete({
       where: {
@@ -30,11 +35,18 @@ export class BlogTextPostRepository implements CRUDRepository<BlogTextPostEntity
       where: {
         id
       },
+      include: {
+        comments: true,
+      }
     });
   }
 
   public find(): Promise<TextPost[]> {
-    return this.prisma.text_Post.findMany({});
+    return this.prisma.text_Post.findMany({
+      include: {
+        comments: true,
+      }
+    });
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

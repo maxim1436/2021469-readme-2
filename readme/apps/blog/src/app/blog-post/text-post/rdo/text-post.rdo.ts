@@ -18,8 +18,12 @@ export class TextPostRdo {
   public tags: string;
 
   @Expose()
+  public status: string;
+
+  @Expose()
   public publishAt: string;
 
   @Expose()
   public userId: string;
+
 }

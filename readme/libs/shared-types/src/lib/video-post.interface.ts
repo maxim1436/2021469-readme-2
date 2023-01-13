@@ -1,3 +1,4 @@
+import { Comment } from './comment.interface';
 
 export interface VideoPost {
   id?: number;
@@ -7,4 +8,6 @@ export interface VideoPost {
   createdAt?: Date;
   publishAt?: Date;
   userId: string;
+  comments: Comment[];
+  status: string;
 }

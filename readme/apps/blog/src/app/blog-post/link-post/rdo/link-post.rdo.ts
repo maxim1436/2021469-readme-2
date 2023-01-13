@@ -11,6 +11,9 @@ export class LinkPostRdo {
   public description: string;
 
   @Expose()
+  public status: string;
+
+  @Expose()
   public tags: string;
 
   @Expose()

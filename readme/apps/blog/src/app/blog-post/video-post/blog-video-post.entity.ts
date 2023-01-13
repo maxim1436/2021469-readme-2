@@ -10,6 +10,7 @@ export class BlogVideoPostEntity implements Entity<BlogVideoPostEntity>, VideoPo
   public userId: string;
   public comments: Comment[];
   public createdAt: Date;
+  public status: string;
   constructor(post: VideoPost) {
     this.fillEntity(post);
   }
@@ -22,6 +23,7 @@ export class BlogVideoPostEntity implements Entity<BlogVideoPostEntity>, VideoPo
     this.publishAt = new Date();
     this.userId = entity.userId;
     this.comments = [];
+    this.status = entity.status;
     this.createdAt = new Date();
   }
 

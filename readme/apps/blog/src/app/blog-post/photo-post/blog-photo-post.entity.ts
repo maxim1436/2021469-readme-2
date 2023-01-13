@@ -8,6 +8,7 @@ export class BlogPhotoPostEntity implements Entity<BlogPhotoPostEntity>, PhotoPo
   public publishAt: Date;
   public userId: string;
   public comments: Comment[];
+  public status: string;
   public createdAt: Date;
   constructor(post: PhotoPost) {
     this.fillEntity(post);
@@ -20,6 +21,7 @@ export class BlogPhotoPostEntity implements Entity<BlogPhotoPostEntity>, PhotoPo
     this.publishAt = new Date();
     this.userId = entity.userId;
     this.comments = [];
+    this.status = entity.status;
     this.createdAt = new Date();
   }
 

@@ -4,4 +4,5 @@ export class CreateTextPostDto {
   public text: string;
   public tags: string;
   public userId: string;
+  public status: string;
 }

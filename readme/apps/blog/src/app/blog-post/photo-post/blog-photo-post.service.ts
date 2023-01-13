@@ -12,7 +12,7 @@ export class BlogPhotoPostService {
   ) {}
 
   async createPhotoPost(dto: CreatePhotoPostDto): Promise<PhotoPost> {
-    const photoPostEntity = new BlogPhotoPostEntity({ ...dto});
+    const photoPostEntity = new BlogPhotoPostEntity({ ...dto, comments:[]});
     return this.blogPhotoPostRepository.create(photoPostEntity);
   }
 
