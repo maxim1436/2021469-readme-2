@@ -1,0 +1,99 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output = "../../../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Video_Post {
+ id             Int @id @default(autoincrement())
+ title          String
+ link           String
+ tags           String
+ createdAt      DateTime @default(now())
+ publishAt      DateTime @default(now())
+ userId         String
+ status         String
+ comments       CommentsVideoPost[]
+}
+
+model CommentsVideoPost {
+  id          Int @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  text        String
+  userId      String
+  postId      Int
+  post        Video_Post @relation(fields: [postId], references: [id])
+}
+
+model Text_Post {
+ id             Int @id @default(autoincrement())
+ title          String
+ announceText   String
+ text           String
+ tags           String
+ createdAt      DateTime @default(now())
+ publishAt      DateTime @default(now())
+ userId         String
+ status         String
+ comments       CommentsTextPost[]
+}
+
+model CommentsTextPost {
+  id          Int @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  text        String
+  userId      String
+  postId      Int
+  post        Text_Post @relation(fields: [postId], references: [id])
+}
+
+model Photo_Post {
+ id             Int @id @default(autoincrement())
+ photo          String
+ tags           String
+ createdAt      DateTime @default(now())
+ publishAt      DateTime @default(now())
+ userId         String
+ status         String
+ comments       CommentsPhotoPost[]
+}
+
+model CommentsPhotoPost {
+  id          Int @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  text        String
+  userId      String
+  postId      Int
+  post        Photo_Post @relation(fields: [postId], references: [id])
+}
+
+model Link_Post {
+ id             Int @id @default(autoincrement())
+ link           String
+ description    String
+ tags           String
+ createdAt      DateTime @default(now())
+ publishAt      DateTime @default(now())
+ userId         String
+ status         String
+ comments       CommentsLinkPost[]
+}
+
+model CommentsLinkPost {
+  id          Int @id @default(autoincrement())
+  createdAt   DateTime @default(now())
+  text        String
+  userId      String
+  postId      Int
+  post        Link_Post @relation(fields: [postId], references: [id])
+}
+
+
+
