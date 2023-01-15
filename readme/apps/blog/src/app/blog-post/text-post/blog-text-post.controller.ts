@@ -1,9 +1,10 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Query } from '@nestjs/common';
 import { BlogTextPostService } from './blog-text-post.service';
 import { fillObject } from '@readme/core';
 import { TextPostRdo } from './rdo/text-post.rdo';
 import { CreateTextPostDto } from './dto/create-text-post.dto';
 import {UpdateTextPostDto} from './dto/update-text-post.dto';
+import { PostQuery } from '../query/post.query';
 
 @Controller('text-posts')
 export class BlogTextPostController {
@@ -12,15 +13,14 @@ export class BlogTextPostController {
   ) {}
 
   @Get('/:id')
-  async show(@Param('id') id: string) {
-    const textPostId = parseInt(id, 10);
-    const textPost = await this.blogTextPostService.getTextPost(textPostId);
-    return fillObject(TextPostRdo, textPost);
+  async show(@Param('id') id: number) {
+    const existTextPost = await this.blogTextPostService.getTextPost(id);
+    return fillObject(TextPostRdo, existTextPost);
   }
 
   @Get('/')
-  async index() {
-    const textPosts = await this.blogTextPostService.getTextPosts();
+  async index(@Query () query: PostQuery) {
+    const textPosts = await this.blogTextPostService.getTextPosts(query);
     return fillObject(TextPostRdo, textPosts);
   }
 
@@ -32,15 +32,13 @@ export class BlogTextPostController {
 
   @Delete('/:id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  async destroy(@Param('id') id: string) {
-    const textPostId = parseInt(id, 10);
-    this.blogTextPostService.deleteTextPost(textPostId);
+  async destroy(@Param('id') id: number) {
+    this.blogTextPostService.deleteTextPost(id);
   }
 
   @Patch('/:id')
-  async update(@Param('id') id: string, @Body() dto: UpdateTextPostDto) {
-    const postId = parseInt(id, 10);
-    const updatedTextPost = await this.blogTextPostService.updateTextPost(postId, dto);
+  async update(@Param('id') id: number, @Body() dto: UpdateTextPostDto) {
+    const updatedTextPost = await this.blogTextPostService.updateTextPost(id, dto);
     return fillObject(TextPostRdo, updatedTextPost)
   }
 }

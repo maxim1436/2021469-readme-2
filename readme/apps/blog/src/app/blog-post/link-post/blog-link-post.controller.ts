@@ -1,9 +1,10 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Query } from '@nestjs/common';
 import { BlogLinkPostService } from './blog-link-post.service';
 import { fillObject } from '@readme/core';
 import { LinkPostRdo } from './rdo/link-post.rdo';
 import { CreateLinkPostDto } from './dto/create-link-post.dto';
 import {UpdateLinkPostDto} from './dto/update-link-post.dto';
+import { PostQuery } from '../query/post.query';
 
 @Controller('link-posts')
 export class BlogLinkPostController {
@@ -12,15 +13,14 @@ export class BlogLinkPostController {
   ) {}
 
   @Get('/:id')
-  async show(@Param('id') id: string) {
-    const linkPostId = parseInt(id, 10);
-    const linkPost = await this.blogLinkPostService.getLinkPost(linkPostId);
+  async show(@Param('id') id: number) {
+    const linkPost = await this.blogLinkPostService.getLinkPost(id);
     return fillObject(LinkPostRdo, linkPost);
   }
 
   @Get('/')
-  async index() {
-    const linkPosts = await this.blogLinkPostService.getLinkPosts();
+  async index(@Query () query: PostQuery) {
+    const linkPosts = await this.blogLinkPostService.getLinkPosts(query);
     return fillObject(LinkPostRdo, linkPosts);
   }
 
@@ -32,15 +32,13 @@ export class BlogLinkPostController {
 
   @Delete('/:id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  async destroy(@Param('id') id: string) {
-    const linkPostId = parseInt(id, 10);
-    this.blogLinkPostService.deleteLinkPost(linkPostId);
+  async destroy(@Param('id') id: number) {
+    this.blogLinkPostService.deleteLinkPost(id);
   }
 
   @Patch('/:id')
-  async update(@Param('id') id: string, @Body() dto: UpdateLinkPostDto) {
-    const postId = parseInt(id, 10);
-    const updatedLinkPost = await this.blogLinkPostService.updateLinkPost(postId, dto);
+  async update(@Param('id') id: number, @Body() dto: UpdateLinkPostDto) {
+    const updatedLinkPost = await this.blogLinkPostService.updateLinkPost(id, dto);
     return fillObject(LinkPostRdo, updatedLinkPost)
   }
 }

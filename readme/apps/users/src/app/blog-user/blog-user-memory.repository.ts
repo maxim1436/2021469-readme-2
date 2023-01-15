@@ -9,6 +9,22 @@ export class BlogUserMemoryRepository implements CRUDRepository<BlogUserEntity, 
 
   private repository: {[key: string]: User} = {};
 
+  public async create(item: BlogUserEntity): Promise<User> {
+    const entry = { ...item.toObject(), _id: crypto.randomUUID()};
+    this.repository[entry._id] = entry;
+
+    return {...entry};
+  }
+
+  public async findById(id: string): Promise<User> {
+
+      if (this.repository[id]) {
+        return {...this.repository[id]}
+      }
+
+      return null;
+    }
+
   public async findByEmail(email: string) {
     const existUser = Object.values(this.repository)
       .find((userItem) => userItem.email === email);
@@ -20,29 +36,14 @@ export class BlogUserMemoryRepository implements CRUDRepository<BlogUserEntity, 
     return {...existUser};
   }
 
-  public async findById(id: string): Promise<User> {
 
-    if (this.repository[id]) {
-      return {...this.repository[id]}
-    }
-
-    return null;
-  }
-
-  public async create(item: BlogUserEntity): Promise<User> {
-    const entry = {...item.toObject(), _id: crypto.randomUUID()};
-    this.repository[entry._id] = entry;
-    console.log(this.repository);
-    return { ...entry };
+  public async destroy(id: string): Promise<void> {
+    delete this.repository[id];
   }
 
   public async update(id: string, item: BlogUserEntity): Promise<User> {
     this.repository[id] = {...item.toObject(), _id: id};
     return this.findById(id);
-  }
-
-  public async destroy(id: string): Promise<void> {
-    delete this.repository[id];
   }
 
 }

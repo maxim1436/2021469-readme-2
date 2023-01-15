@@ -4,6 +4,7 @@ import {VideoPost} from '@readme/shared-types';
 import {BlogVideoPostEntity} from './blog-video-post.entity';
 import {UpdateVideoPostDto} from './dto/update-video-post.dto';
 import {Injectable} from '@nestjs/common';
+import { PostQuery } from '../query/post.query';
 
 @Injectable()
 export class BlogVideoPostService {
@@ -24,8 +25,8 @@ export class BlogVideoPostService {
     return this.blogVideoPostRepository.findById(id);
   }
 
-  async getVideoPosts(): Promise<VideoPost[]> {
-    return this.blogVideoPostRepository.find();
+  async getVideoPosts(query: PostQuery): Promise<VideoPost[]> {
+    return this.blogVideoPostRepository.find(query);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -4,6 +4,7 @@ import {TextPost} from '@readme/shared-types';
 import {BlogTextPostEntity} from './blog-text-post.entity';
 import {UpdateTextPostDto} from './dto/update-text-post.dto';
 import {Injectable} from '@nestjs/common';
+import { PostQuery } from '../query/post.query';
 
 @Injectable()
 export class BlogTextPostService {
@@ -24,8 +25,8 @@ export class BlogTextPostService {
     return this.blogTextPostRepository.findById(id);
   }
 
-  async getTextPosts(): Promise<TextPost[]> {
-    return this.blogTextPostRepository.find();
+  async getTextPosts(query: PostQuery): Promise<TextPost[]> {
+    return this.blogTextPostRepository.find(query);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

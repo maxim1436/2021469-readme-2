@@ -24,7 +24,7 @@ GET http://localhost:3333/api/text-posts/1 HTTP/1.1
 ###
 
 # Get all posts
-GET http://localhost:3333/api/text-posts HTTP/1.1
+GET http://localhost:3333/api/text-posts?limit=2&sortDirection=asc HTTP/1.1
 
 ###
 
