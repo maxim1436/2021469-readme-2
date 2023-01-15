@@ -4,6 +4,7 @@ import {PhotoPost} from '@readme/shared-types';
 import {BlogPhotoPostEntity} from './blog-photo-post.entity';
 import {UpdatePhotoPostDto} from './dto/update-photo-post.dto';
 import {Injectable} from '@nestjs/common';
+import { PostQuery } from '../query/post.query';
 
 @Injectable()
 export class BlogPhotoPostService {
@@ -24,8 +25,8 @@ export class BlogPhotoPostService {
     return this.blogPhotoPostRepository.findById(id);
   }
 
-  async getPhotoPosts(): Promise<PhotoPost[]> {
-    return this.blogPhotoPostRepository.find();
+  async getPhotoPosts(query: PostQuery): Promise<PhotoPost[]> {
+    return this.blogPhotoPostRepository.find(query);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

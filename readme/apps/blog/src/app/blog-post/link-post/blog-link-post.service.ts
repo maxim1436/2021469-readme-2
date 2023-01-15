@@ -4,6 +4,7 @@ import {LinkPost} from '@readme/shared-types';
 import {BlogLinkPostEntity} from './blog-link-post.entity';
 import {UpdateLinkPostDto} from './dto/update-link-post.dto';
 import {Injectable} from '@nestjs/common';
+import { PostQuery } from '../query/post.query';
 
 @Injectable()
 export class BlogLinkPostService {
@@ -24,8 +25,8 @@ export class BlogLinkPostService {
     return this.blogLinkPostRepository.findById(id);
   }
 
-  async getLinkPosts(): Promise<LinkPost[]> {
-    return this.blogLinkPostRepository.find();
+  async getLinkPosts(query: PostQuery): Promise<LinkPost[]> {
+    return this.blogLinkPostRepository.find(query);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

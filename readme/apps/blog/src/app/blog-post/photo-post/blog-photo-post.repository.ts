@@ -3,6 +3,7 @@ import { BlogPhotoPostEntity } from './blog-photo-post.entity';
 import { PhotoPost } from '@readme/shared-types';
 import { PrismaService } from '../../prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
+import { PostQuery } from '../query/post.query';
 
 @Injectable()
 export class BlogPhotoPostRepository implements CRUDRepository<BlogPhotoPostEntity, number, PhotoPost> {
@@ -42,11 +43,18 @@ export class BlogPhotoPostRepository implements CRUDRepository<BlogPhotoPostEnti
     });
   }
 
-  public find(): Promise<PhotoPost[]> {
+  public find({limit, sortDirection, page}: PostQuery): Promise<PhotoPost[]> {
     return this.prisma.photo_Post.findMany({
+      take: limit,
       include: {
         comments: true,
-      }
+      },
+      orderBy: [
+        {
+          createdAt: sortDirection
+        }
+      ],
+      skip: page > 0 ? limit * (page - 1) : undefined,
     });
   }
 

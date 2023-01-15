@@ -3,6 +3,7 @@ import { BlogLinkPostEntity } from './blog-link-post.entity';
 import { LinkPost } from '@readme/shared-types';
 import { PrismaService } from '../../prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
+import { PostQuery } from '../query/post.query';
 
 @Injectable()
 export class BlogLinkPostRepository implements CRUDRepository<BlogLinkPostEntity, number, LinkPost> {
@@ -42,11 +43,18 @@ export class BlogLinkPostRepository implements CRUDRepository<BlogLinkPostEntity
     });
   }
 
-  public find(): Promise<LinkPost[]> {
+  public find({limit, sortDirection, page}: PostQuery): Promise<LinkPost[]> {
     return this.prisma.link_Post.findMany({
+      take: limit,
       include: {
         comments: true,
-      }
+      },
+      orderBy: [
+        {
+          createdAt: sortDirection
+        }
+      ],
+      skip: page > 0 ? limit * (page - 1) : undefined,
     });
   }
 
