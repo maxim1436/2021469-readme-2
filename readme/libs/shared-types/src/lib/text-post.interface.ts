@@ -1,4 +1,4 @@
-import { Comment } from './comment.interface';
+// import { Comment } from './comment.interface';
 // import { PostStatus } from './post-status.enum';
 
 export interface TextPost {
@@ -10,6 +10,7 @@ export interface TextPost {
   createdAt?: Date;
   publishAt?: Date;
   userId: string;
-  comments: Comment[];
+  // comments: Comment[];
   status: string;
+  // post_id: number;
 }
