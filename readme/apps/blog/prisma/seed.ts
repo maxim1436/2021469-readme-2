@@ -3,26 +3,22 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function fillDb() {
-  await prisma.text_Post.upsert({
-    where: { id: 1 },
-    update: {},
-    create: {
-
-                  title: 'Худеющи!!!!!й',
-                  userId: '15',
-                  text: 'Недавно прочитал страшный роман «Худеющий».',
-                  announceText: 'На мой взгляд, это один из самых страшных романов Стивена Кинга.',
-                  tags: 'Реакция на книгу',
-                  status: 'Опубликована',
-                  comments: {
-                    create: [
-                      {
-                        text: 'Вау! Отличная книга.',
-                        userId: '14',
-                      }
-                    ]
-                  }
-    }
+  await prisma.post.upsert({
+      where: { id: 2 },
+      update: {},
+      create: {
+        type: 'text_post',
+        textPosts: {
+          create: {
+            title: 'Худеющи!!!!!й123',
+            userId: '15',
+            text: 'Недавно прочитал страшный роман «Худеющий».',
+            announceText: 'На мой взгляд, это один из самых страшных романов Стивена Кинга.',
+            tags: 'Реакция на книгу',
+            status: 'Опубликована',
+          }
+        },
+      },
   });
   console.info('🤘️ Database was filled')
 }
@@ -37,3 +33,5 @@ fillDb()
 
     process.exit(1);
   })
+
+

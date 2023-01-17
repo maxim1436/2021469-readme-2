@@ -5,4 +5,5 @@ export class CreateTextPostDto {
   public tags: string;
   public userId: string;
   public status: string;
+  public post_id: number;
 }

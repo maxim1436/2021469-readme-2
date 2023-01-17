@@ -1,4 +1,4 @@
-import { Comment } from './comment.interface';
+// import { Comment } from './comment.interface';
 
 export interface LinkPost {
   id?: number;
@@ -8,6 +8,6 @@ export interface LinkPost {
   createdAt?: Date;
   publishAt?: Date;
   userId: string;
-  comments: Comment[];
+  // comments: Comment[];
   status: string;
 }
