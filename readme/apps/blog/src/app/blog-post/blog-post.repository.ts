@@ -111,7 +111,7 @@ export class BlogPostRepository implements CRUDRepository<BlogPostEntity, number
 
   }
 
-  public update(id: number, item: BlogPostEntity): Promise<Post> {
+  public update(): Promise<Post> {
     return Promise.resolve(undefined);
   }
 
