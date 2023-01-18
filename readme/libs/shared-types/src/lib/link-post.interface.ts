@@ -1,4 +1,3 @@
-// import { Comment } from './comment.interface';
 
 export interface LinkPost {
   id?: number;
@@ -8,6 +7,5 @@ export interface LinkPost {
   createdAt?: Date;
   publishAt?: Date;
   userId: string;
-  // comments: Comment[];
   status: string;
 }

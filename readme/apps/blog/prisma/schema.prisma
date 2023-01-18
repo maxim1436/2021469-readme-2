@@ -41,19 +41,9 @@ model Video_Post {
  publishAt      DateTime @default(now())
  userId         String
  status         String
-//  comments       CommentsVideoPost[]
  post_id        Int
  post           Post @relation(fields: [post_id], references: [id])
 }
-
-// model CommentsVideoPost {
-//   id          Int @id @default(autoincrement())
-//   createdAt   DateTime @default(now())
-//   text        String
-//   userId      String
-//   postId      Int
-//   post        Video_Post @relation(fields: [postId], references: [id])
-// }
 
 model Text_Post {
  id             Int @id @default(autoincrement())
@@ -65,19 +55,9 @@ model Text_Post {
  publishAt      DateTime @default(now())
  userId         String
  status         String
-//  comments       CommentsTextPost[]
  post_id        Int
  post           Post @relation(fields: [post_id], references: [id])
 }
-
-// model CommentsTextPost {
-//   id          Int @id @default(autoincrement())
-//   createdAt   DateTime @default(now())
-//   text        String
-//   userId      String
-//   postId      Int
-//   post        Text_Post @relation(fields: [postId], references: [id])
-// }
 
 model Photo_Post {
  id             Int @id @default(autoincrement())
@@ -87,19 +67,9 @@ model Photo_Post {
  publishAt      DateTime @default(now())
  userId         String
  status         String
-//  comments       CommentsPhotoPost[]
  post_id        Int
  post           Post @relation(fields: [post_id], references: [id])
 }
-
-// model CommentsPhotoPost {
-//   id          Int @id @default(autoincrement())
-//   createdAt   DateTime @default(now())
-//   text        String
-//   userId      String
-//   postId      Int
-//   post        Photo_Post @relation(fields: [postId], references: [id])
-// }
 
 model Link_Post {
  id             Int @id @default(autoincrement())
@@ -110,19 +80,6 @@ model Link_Post {
  publishAt      DateTime @default(now())
  userId         String
  status         String
-//  comments       CommentsLinkPost[]
  post_id        Int
  post           Post @relation(fields: [post_id], references: [id])
 }
-
-// model CommentsLinkPost {
-//   id          Int @id @default(autoincrement())
-//   createdAt   DateTime @default(now())
-//   text        String
-//   userId      String
-//   postId      Int
-//   post        Link_Post @relation(fields: [postId], references: [id])
-// }
-
-
-

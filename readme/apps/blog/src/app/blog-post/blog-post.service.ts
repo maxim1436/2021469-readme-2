@@ -32,7 +32,6 @@ export class BlogPostService {
     return this.blogPostRepository.find(query);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async updatePost(id: number, dto: UpdateTextPostDto): Promise<Post> {
     throw new Error('Not implemented…');
   }
