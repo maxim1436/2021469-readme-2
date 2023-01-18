@@ -11,7 +11,6 @@ export class BlogPostRepository implements CRUDRepository<BlogPostEntity, number
 
   public async create(item: BlogPostEntity): Promise<Post> {
     const entityData = item.toObject();
-    // console.log(entityData);
     return this.prisma.post.create({
       data: {
         ...entityData,
@@ -19,19 +18,15 @@ export class BlogPostRepository implements CRUDRepository<BlogPostEntity, number
           connect: []
         },
         textPosts: {
-          // connect: []
           create: [...item.textPosts]
         },
         videoPosts: {
-          // connect: []
           create: [...item.videoPosts]
         },
         photoPosts: {
-          // connect: []
           create: [...item.photoPosts]
         },
         linkPosts: {
-          // connect: []
           create: [...item.linkPosts]
         },
       },
@@ -116,8 +111,7 @@ export class BlogPostRepository implements CRUDRepository<BlogPostEntity, number
 
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public update(id: number, item: BlogPostEntity): Promise<Post> {
+  public update(): Promise<Post> {
     return Promise.resolve(undefined);
   }
 

@@ -2,7 +2,6 @@ import {BlogPostRepository} from './blog-post.repository';
 import {CreatePostDto} from './dto/create-post.dto';
 import {Post} from '@readme/shared-types';
 import {BlogPostEntity} from './blog-post.entity';
-import {UpdateTextPostDto} from './dto/update-text-post.dto';
 import {Injectable} from '@nestjs/common';
 import { PostQuery } from './query/post.query';
 
@@ -32,8 +31,7 @@ export class BlogPostService {
     return this.blogPostRepository.find(query);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async updatePost(id: number, dto: UpdateTextPostDto): Promise<Post> {
+  async updatePost(): Promise<Post> {
     throw new Error('Not implemented…');
   }
 
