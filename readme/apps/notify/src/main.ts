@@ -5,10 +5,13 @@
 
 import { Logger, ValidationPipe  } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-
 import { AppModule } from './app/app.module';
 import { ConfigService } from '@nestjs/config';
 import { getRabbitMqConfig } from '../config/rabbitmq.config';
+
+const DEFAULT_PORT = 3333;
+const GLOBAL_PREFIX = 'api';
+const PORT = process.env.PORT || DEFAULT_PORT;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -21,12 +24,11 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe());
 
-  const globalPrefix = 'api';
-  app.setGlobalPrefix(globalPrefix);
-  const port = process.env.PORT || 3333;
-  await app.listen(port);
+  app.setGlobalPrefix(GLOBAL_PREFIX);
+
+  await app.listen(PORT);
   Logger.log(
-    `🚀 REST is running on: http://localhost:${port}/${globalPrefix}`
+    `🚀 REST is running on: http://localhost:${PORT}/${GLOBAL_PREFIX}`
   );
 }
 

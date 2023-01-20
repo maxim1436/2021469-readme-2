@@ -3,7 +3,7 @@ import { BlogPostService } from './blog-post.service';
 import { fillObject } from '@readme/core';
 import { PostRdo } from './rdo/post.rdo';
 import { CreatePostDto } from './dto/create-post.dto';
-import {UpdateTextPostDto} from './dto/update-text-post.dto';
+import {UpdatePostDto} from './dto/update-post.dto';
 import { PostQuery } from './query/post.query';
 
 @Controller('posts')
@@ -38,7 +38,7 @@ export class BlogPostController {
   }
 
   @Patch('/:id')
-  async update(@Param('id') id: number, @Body() dto: UpdateTextPostDto) {
+  async update(@Param('id') id: number, @Body() dto: UpdatePostDto) {
     const updatedPost = await this.blogPostService.updatePost(id, dto);
     return fillObject(PostRdo, updatedPost)
   }

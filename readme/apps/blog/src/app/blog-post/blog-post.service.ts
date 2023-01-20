@@ -1,5 +1,6 @@
 import {BlogPostRepository} from './blog-post.repository';
 import {CreatePostDto} from './dto/create-post.dto';
+import {UpdatePostDto} from './dto/update-post.dto';
 import {Post} from '@readme/shared-types';
 import {BlogPostEntity} from './blog-post.entity';
 import {Injectable} from '@nestjs/common';
@@ -31,8 +32,8 @@ export class BlogPostService {
     return this.blogPostRepository.find(query);
   }
 
-  async updatePost(): Promise<Post> {
-    throw new Error('Not implemented…');
+  async updatePost(id: number, dto: UpdatePostDto): Promise<Post> {
+    return this.blogPostRepository.update(id, dto);
   }
 
 }

@@ -11,6 +11,8 @@ export class BlogPostEntity implements Entity<BlogPostEntity>, Post {
   public photoPosts: PhotoPost[];
   public linkPosts: LinkPost[];
   public comments: Comment[];
+  public fild?: string;
+  public changing?: string;
 
   constructor(post: Post) {
     this.fillEntity(post);

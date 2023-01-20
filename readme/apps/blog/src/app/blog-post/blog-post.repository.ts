@@ -4,6 +4,7 @@ import { Post } from '@readme/shared-types';
 import { PrismaService } from '../prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
 import { PostQuery } from './query/post.query';
+import {UpdatePostDto} from './dto/update-post.dto';
 
 @Injectable()
 export class BlogPostRepository implements CRUDRepository<BlogPostEntity, number, Post> {
@@ -111,8 +112,59 @@ export class BlogPostRepository implements CRUDRepository<BlogPostEntity, number
 
   }
 
-  public update(): Promise<Post> {
-    return Promise.resolve(undefined);
+  public async update(id: number, item: UpdatePostDto): Promise<Post> {
+    await this.prisma.post.update({
+      where: {
+        id
+      },
+      data: {
+        textPosts: {
+          update: {
+            where: {
+              id
+            },
+            data: {[`${item.field}`]:item.changing},
+          },
+        },
+        linkPosts: {
+          update: {
+            where: {
+              id
+            },
+            data: {[`${item.field}`]:item.changing},
+          },
+        },
+        photoPosts: {
+          update: {
+            where: {
+              id
+            },
+            data: {[`${item.field}`]:item.changing},
+          },
+        },
+        videoPosts: {
+          update: {
+            where: {
+              id
+            },
+            data: {[`${item.field}`]:item.changing},
+          },
+        },
+      }
+    });
+
+    return this.prisma.post.findFirst({
+      where: {
+        id
+      },
+      include: {
+        comments: true,
+        linkPosts: true,
+        photoPosts: true,
+        textPosts: true,
+        videoPosts: true,
+      }
+    });
   }
 
 }
